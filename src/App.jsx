@@ -2,15 +2,15 @@
 import React, { useState } from "react";
 
 const initialPlayers = [
-  { name: "Andrés", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Pablo", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Javi", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Diego", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Mario", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Nico", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Toni", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Álvaro", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Robert", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Pepe", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Jorge", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Kike", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Pepe2", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Joao", elo1v1: 1000, elo2v2: 1000 },
   { name: "Luis", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Oscar", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Alex", elo1v1: 1000, elo2v2: 1000 },
 ];
 
 function calculateExpectedScore(eloA, eloB) {
