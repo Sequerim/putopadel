@@ -1,0 +1,11 @@
+{
+  "build": {
+    "env": {
+      "NODE_VERSION": "18"
+    },
+    "env": {
+      "FORCE_REBUILD": "true"
+    }
+  }
+}
+
