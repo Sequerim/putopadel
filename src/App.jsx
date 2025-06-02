@@ -28,14 +28,22 @@ function App() {
   const [players, setPlayers] = useState(initialPlayers);
   const [matchHistory, setMatchHistory] = useState([]);
   const [view, setView] = useState("ranking");
-  const [form, setForm] = useState({ type: "1v1", playerA: "", playerB: "", sets: "" });
+  const [form, setForm] = useState({ type: "1v1", playerA: "", playerB: "", sets: ["", "", ""] });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name.startsWith("set")) {
+      const newSets = [...form.sets];
+      const index = parseInt(name.slice(-1));
+      newSets[index] = value;
+      setForm({ ...form, sets: newSets });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
 
   const handleSubmit = () => {
-    const sets = form.sets.split(",").map(set => set.trim().split("-").map(Number));
+    const sets = form.sets.filter(Boolean).map(set => set.trim().split("-").map(Number));
     let gamesA = 0, gamesB = 0;
     sets.forEach(([a, b]) => {
       gamesA += a;
@@ -44,7 +52,7 @@ function App() {
     const totalGames = gamesA + gamesB;
     const resultA = gamesA / totalGames;
     const updated = [...players];
-    const record = { type: form.type, sets: form.sets };
+    const record = { type: form.type, sets: form.sets.join(", ") };
 
     if (form.type === "1v1") {
       const iA = updated.findIndex(p => p.name === form.playerA);
@@ -76,21 +84,36 @@ function App() {
   return (
     <div className="p-4 bg-black min-h-screen text-white font-mono">
       <header className="text-center mb-6">
-        <img src="https://cdn-icons-png.flaticon.com/512/722/722221.png" alt="logo" className="w-12 mx-auto mb-2" />
+        <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="logo" className="w-12 mx-auto mb-2" />
         <h1 className="text-3xl font-extrabold tracking-wide text-white">Putopadel</h1>
       </header>
 
       {view === "ranking" && (
         <>
-          <h2 className="text-xl mb-2 border-b border-white pb-1">Ranking 1v1</h2>
-          {[...players].sort((a, b) => b.elo1v1 - a.elo1v1).map((p, i) => (
-            <p key={p.name} className="text-lg">{i + 1}. {p.name} - {p.elo1v1}</p>
-          ))}
-
-          <h2 className="text-xl mt-6 mb-2 border-b border-white pb-1">Ranking 2v2 Individual</h2>
-          {[...players].sort((a, b) => b.elo2v2 - a.elo2v2).map((p, i) => (
-            <p key={p.name} className="text-lg">{i + 1}. {p.name} - {p.elo2v2}</p>
-          ))}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <h2 className="text-xl mb-2 border-b border-white pb-1">Ranking 1v1</h2>
+              <table className="w-full border border-white text-left">
+                <thead><tr><th>#</th><th>Nombre</th><th>ELO</th></tr></thead>
+                <tbody>
+                  {[...players].sort((a, b) => b.elo1v1 - a.elo1v1).map((p, i) => (
+                    <tr key={p.name}><td>{i + 1}</td><td>{p.name}</td><td>{p.elo1v1}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h2 className="text-xl mb-2 border-b border-white pb-1">Ranking 2v2 Individual</h2>
+              <table className="w-full border border-white text-left">
+                <thead><tr><th>#</th><th>Nombre</th><th>ELO</th></tr></thead>
+                <tbody>
+                  {[...players].sort((a, b) => b.elo2v2 - a.elo2v2).map((p, i) => (
+                    <tr key={p.name}><td>{i + 1}</td><td>{p.name}</td><td>{p.elo2v2}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
 
           <button onClick={() => setView("form")} className="mt-6 bg-white text-black px-6 py-2 rounded shadow-md hover:bg-gray-200">+ Nuevo Partido</button>
 
@@ -111,13 +134,9 @@ function App() {
               </select>
             </label>
           </div>
-
-          <div>
-            <label className="block">Jugador A:
-              <input name="playerA" onChange={handleChange} className="text-black ml-2" />
-            </label>
-          </div>
-
+          <label className="block">Jugador A:
+            <input name="playerA" onChange={handleChange} className="text-black ml-2" />
+          </label>
           {form.type === "2v2" && (
             <>
               <label className="block">Jugador A2:
@@ -131,17 +150,16 @@ function App() {
               </label>
             </>
           )}
-
           {form.type === "1v1" && (
             <label className="block">Jugador B:
               <input name="playerB" onChange={handleChange} className="text-black ml-2" />
             </label>
           )}
-
-          <label className="block">Sets (ej: 6-4,4-6,6-0):
-            <input name="sets" onChange={handleChange} className="text-black ml-2" />
-          </label>
-
+          {[0, 1, 2].map(i => (
+            <label key={i} className="block">Set {i + 1}:
+              <input name={`set${i}`} onChange={handleChange} className="text-black ml-2" placeholder="6-3" />
+            </label>
+          ))}
           <div className="space-x-4">
             <button onClick={handleSubmit} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Registrar</button>
             <button onClick={() => setView("ranking")} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">← Volver</button>
