@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "chmod +x ./node_modules/.bin/vite && vite build",
+    "build": "npx vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -16,3 +16,4 @@
     "vite": "^4.5.0"
   }
 }
+
