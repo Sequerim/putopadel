@@ -2,15 +2,15 @@
 import React, { useState } from "react";
 
 const initialPlayers = [
-  { name: "Andrés", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Pablo", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Javi", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Diego", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Mario", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Nico", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Toni", elo1v1: 1000, elo2v2: 1000 },
-  { name: "Álvaro", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Robert", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Pepe", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Jorge", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Kike", elo1v1: 1000, elo2v2: 1000 },
   { name: "Luis", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Joao", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Pepe2", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Oscar", elo1v1: 1000, elo2v2: 1000 },
+  { name: "Alex", elo1v1: 1000, elo2v2: 1000 },
 ];
 
 function calculateExpectedScore(eloA, eloB) {
@@ -84,7 +84,7 @@ function App() {
   return (
     <div className="p-4 bg-black min-h-screen text-white font-mono">
       <header className="text-center mb-6">
-        <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="logo" className="w-12 mx-auto mb-2" />
+        <img src="/logo.jpg" alt="Putopadel logo" className="w-20 mx-auto mb-2" />
         <h1 className="text-3xl font-extrabold tracking-wide text-white">Putopadel</h1>
       </header>
 
@@ -135,24 +135,39 @@ function App() {
             </label>
           </div>
           <label className="block">Jugador A:
-            <input name="playerA" onChange={handleChange} className="text-black ml-2" />
+            <select name="playerA" onChange={handleChange} className="text-black ml-2">
+              <option value="">Selecciona</option>
+              <option value="Robert">Robert</option><option value="Pepe">Pepe</option><option value="Jorge">Jorge</option><option value="Kike">Kike</option><option value="Luis">Luis</option><option value="Joao">Joao</option><option value="Pepe2">Pepe2</option><option value="Oscar">Oscar</option><option value="Alex">Alex</option>
+            </select>
           </label>
           {form.type === "2v2" && (
             <>
               <label className="block">Jugador A2:
-                <input name="playerA2" onChange={handleChange} className="text-black ml-2" />
+                <select name="playerA2" onChange={handleChange} className="text-black ml-2">
+              <option value="">Selecciona</option>
+              <option value="Robert">Robert</option><option value="Pepe">Pepe</option><option value="Jorge">Jorge</option><option value="Kike">Kike</option><option value="Luis">Luis</option><option value="Joao">Joao</option><option value="Pepe2">Pepe2</option><option value="Oscar">Oscar</option><option value="Alex">Alex</option>
+            </select>
               </label>
               <label className="block">Jugador B:
-                <input name="playerB" onChange={handleChange} className="text-black ml-2" />
+                <select name="playerB" onChange={handleChange} className="text-black ml-2">
+              <option value="">Selecciona</option>
+              <option value="Robert">Robert</option><option value="Pepe">Pepe</option><option value="Jorge">Jorge</option><option value="Kike">Kike</option><option value="Luis">Luis</option><option value="Joao">Joao</option><option value="Pepe2">Pepe2</option><option value="Oscar">Oscar</option><option value="Alex">Alex</option>
+            </select>
               </label>
               <label className="block">Jugador B2:
-                <input name="playerB2" onChange={handleChange} className="text-black ml-2" />
+                <select name="playerB2" onChange={handleChange} className="text-black ml-2">
+              <option value="">Selecciona</option>
+              <option value="Robert">Robert</option><option value="Pepe">Pepe</option><option value="Jorge">Jorge</option><option value="Kike">Kike</option><option value="Luis">Luis</option><option value="Joao">Joao</option><option value="Pepe2">Pepe2</option><option value="Oscar">Oscar</option><option value="Alex">Alex</option>
+            </select>
               </label>
             </>
           )}
           {form.type === "1v1" && (
             <label className="block">Jugador B:
-              <input name="playerB" onChange={handleChange} className="text-black ml-2" />
+              <select name="playerB" onChange={handleChange} className="text-black ml-2">
+              <option value="">Selecciona</option>
+              <option value="Robert">Robert</option><option value="Pepe">Pepe</option><option value="Jorge">Jorge</option><option value="Kike">Kike</option><option value="Luis">Luis</option><option value="Joao">Joao</option><option value="Pepe2">Pepe2</option><option value="Oscar">Oscar</option><option value="Alex">Alex</option>
+            </select>
             </label>
           )}
           {[0, 1, 2].map(i => (
